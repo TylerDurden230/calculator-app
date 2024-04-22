@@ -1,5 +1,5 @@
 type Props = {
-    value: string,
+    value: string | number,
     className?: string
 }
 
