@@ -16,20 +16,32 @@ const calculatorSlice = createSlice({
     name: "calculator",
     initialState,
     reducers: {
-        sum: (state) => {
+        setValue1: (state : CalculatorState, action) => {
+            state.value1 = action.payload
+        },
+        setValue2: (state : CalculatorState, action) => {
+            state.value2 = action.payload
+        },
+        sum: (state : CalculatorState) => {
             state.result = state.value1 + state.value2
         },
-        subtract: (state) => {
+        subtract: (state : CalculatorState) => {
             state.result = state.value1 - state.value2
         },
-        multiply: (state) => {
+        multiply: (state : CalculatorState) => {
             state.result = state.value1 * state.value2
         },
-        divide: (state) => {
+        divide: (state : CalculatorState) => {
             state.result = state.value1 / state.value2
+        },
+        reset: (state : CalculatorState) => {
+            state.result = 0;
+            state.value1 = 0;
+            state.value2 = 0;
         }
 
     }
 })
 
+export const {sum, subtract, multiply, divide} = calculatorSlice.actions
 export default calculatorSlice.reducer
