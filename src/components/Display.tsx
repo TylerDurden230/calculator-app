@@ -1,8 +1,8 @@
-import {useState} from "react";
+import { useSelector } from "react-redux";
 
 const Display = () => {
 
-  const [display, setDisplay] = useState<string>("")
+  const display = useSelector((state: any) => state.calculator.display)
 
   return (
     <div className='debug-border p1 display'>

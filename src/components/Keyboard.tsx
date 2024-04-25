@@ -1,7 +1,12 @@
 import { useMemo } from "react";
 import Button from "./Button";
+import { useDispatch } from "react-redux";
+import { setDisplay, reset } from "../features/calculator/calculatorSlice";
 
 const Keyboard = () => {
+
+  const dispatch = useDispatch();
+
   const displayButtons = useMemo(() => {
     const buttons = [
       7,
@@ -25,10 +30,12 @@ const Keyboard = () => {
     ];
 
     return buttons.map((button, index) => {
-        if(button === "=" || button === "reset")
-            return <Button value={button} key={index} className="half-width-button" func={()=> console.log(button)} />
-        else
-            return <Button value={button} key={index} func={()=> console.log(button)} />;
+      if (button === "=")
+        return <Button value={button} key={index} className="half-width-button" func={() => console.log(button)} />
+      if (button === "reset")
+        return <Button value={button} key={index} className="half-width-button" func={() => dispatch(reset())} />
+      else
+        return <Button value={button} key={index} func={() => dispatch(setDisplay(button))} />;
     });
   }, []);
 
