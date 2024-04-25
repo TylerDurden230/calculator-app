@@ -4,7 +4,15 @@ import Calculator from './components/Calculator'
 
 function App() {
 
-  return (
+  //  Actions
+  const sum = { type: "operations/sum"}
+  const multiply = { type: "operations/sum"}
+  const divide = { type: "operations/sum"}
+  const subtract = { type: "operations/sum"}
+
+  // Reducers
+  
+ return (
     <>
       <Calculator />
     </>
