@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
-import { setDisplay, reset, del } from "../features/calculator/calculatorSlice";
+import { setDisplay, reset, del, operation } from "../features/calculator/calculatorSlice";
 
 const Keyboard = () => {
 
@@ -36,6 +36,8 @@ const Keyboard = () => {
         return <Button value={button} key={index} className="half-width-button" func={() => console.log(button)} />
       if (button === "reset")
         return <Button value={button} key={index} className="half-width-button" func={() => dispatch(reset())} />
+      if (button === "+" || button === "-" || button === "x" || button === "/")
+        return <Button value={button} key={index} func={() => dispatch(operation(button))} />;
       else
         return <Button value={button} key={index} func={() => dispatch(setDisplay(button))} />;
     });
