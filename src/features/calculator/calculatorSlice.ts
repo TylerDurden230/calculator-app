@@ -22,6 +22,9 @@ const calculatorSlice = createSlice({
         setDisplay: (state : CalculatorState, action) => {
             state.display += action.payload
         },
+        del: (state : CalculatorState) => {
+            state.display = state.display.slice(0, -1)
+        },
         setValue1: (state : CalculatorState, action) => {
             state.value1 = action.payload
         },
@@ -49,5 +52,5 @@ const calculatorSlice = createSlice({
     }
 })
 
-export const {sum, subtract, multiply, divide, reset, setDisplay, setValue1, setValue2} = calculatorSlice.actions
+export const {sum, subtract, multiply, divide, reset, setDisplay, setValue1, setValue2, del} = calculatorSlice.actions
 export default calculatorSlice.reducer

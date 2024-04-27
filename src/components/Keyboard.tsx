@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import Button from "./Button";
 import { useDispatch } from "react-redux";
-import { setDisplay, reset } from "../features/calculator/calculatorSlice";
+import { setDisplay, reset, del } from "../features/calculator/calculatorSlice";
 
 const Keyboard = () => {
 
@@ -30,6 +30,8 @@ const Keyboard = () => {
     ];
 
     return buttons.map((button, index) => {
+      if (button === "del")
+        return <Button value={button} key={index} func={() => dispatch(del())} />
       if (button === "=")
         return <Button value={button} key={index} className="half-width-button" func={() => console.log(button)} />
       if (button === "reset")
