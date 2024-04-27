@@ -27,16 +27,32 @@ const calculatorSlice = createSlice({
         setDisplay: (state: CalculatorState, action) => {
             state.display += action.payload
         },
+        resetDisplay: (state: CalculatorState) => {
+            state.display = ""
+        },
         del: (state: CalculatorState) => {
             state.display = state.display.slice(0, -1)
         },
-        equal: (state: CalculatorState) => {
-            state.display = state.result.toString()
+        equal: (state: CalculatorState, action) => {
+            if (state.operator === "+") {
+                state.result = state.value1! + state.value2!
+            }
+            else if (state.operator === "-") {
+                state.result = state.value1! - state.value2!
+            }
+            else if (state.operator === "x") {
+                state.result = state.value1! * state.value2!
+            }
+            else if (state.operator === "/") {
+                state.result = state.value1! / state.value2!
+            }
         },
         setValue1: (state: CalculatorState, action) => {
+            typeof action.payload === "string" ? state.value1 = parseFloat(action.payload) :
             state.value1 = action.payload
         },
         setValue2: (state: CalculatorState, action) => {
+            typeof action.payload === "string" ? state.value2 = parseFloat(action.payload) :
             state.value2 = action.payload
         },
         sum: (state: CalculatorState) => {
@@ -70,12 +86,10 @@ const calculatorSlice = createSlice({
             else if (action.payload === "/") {
                 state.operator = "/"
             }
-
-            state.value1 = state.result
         },
 
     }
 })
 
-export const { sum, subtract, multiply, divide, reset, setDisplay, setValue1, setValue2, del, equal, operation } = calculatorSlice.actions
+export const { sum, subtract, multiply, divide, reset, setDisplay, setValue1, setValue2, del, equal, operation, resetDisplay } = calculatorSlice.actions
 export default calculatorSlice.reducer
