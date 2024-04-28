@@ -1,81 +1,115 @@
 import { useMemo } from "react";
 import Button from "./Button";
 import { useDispatch, useSelector } from "react-redux";
-import { setDisplay, reset, del, operation, setValue1, setValue2, resetDisplay, equal, sum, subtract, multiply, divide } from "../features/calculator/calculatorSlice";
+import { setDisplay, reset, del, setValue1, setValue2, resetDisplay } from "../features/calculator/calculatorSlice";
+import { ButtonType } from "../types/types";
 
 const Keyboard = () => {
 
   const dispatch = useDispatch();
   const calculatorState = useSelector((state: any) => state.calculator);
 
-  const valutation = () => {
-    if (calculatorState.value1 === null) {
-      console.log("1ST IF -> value1: ", calculatorState.value1)
-      dispatch(setValue1(calculatorState.display));
-      dispatch(resetDisplay());
+  const handleDigit = (buttonValue : string) => {
+    console.log("handledigit")
+    if (!calculatorState.value1.isSet){
+      console.log("handledigit 1st IF: value1-> ", calculatorState.value1)
+      dispatch(setValue1(buttonValue))
     }
-    else if (calculatorState.value1 && calculatorState.value2 === null) {
-      console.log("2ND IF -> value1: ", calculatorState.value1)
-      dispatch(setValue2(calculatorState.display));
-    }
-    else {
-      console.log("3rd IF -> value1 e value 2: ", calculatorState.value1, calculatorState.value2)
-      dispatch(setValue1(calculatorState.result));
-      dispatch(setValue2(null));
-    }
-  }
+    else if (calculatorState.value1.isSet && !calculatorState.value2.isSet)
+      dispatch(setValue2(buttonValue))
 
-  const handleEqual = (operator : string) => {
-    if (calculatorState.value1 !== null && calculatorState.value2 !== null) {
-      if (operator === "+") {
-        dispatch(sum());
-        dispatch(setDisplay(calculatorState.result));
-      }
-      else if (operator === "-") {
-        dispatch(subtract());
-      }
-      else if (operator === "x") {
-        dispatch(multiply());
-      }
-      else if (operator === "/") {
-        dispatch(divide());
-    }
   }
-}
 
   const displayButtons = useMemo(() => {
     const buttons = [
-      7,
-      8,
-      9,
-      "del",
-      4,
-      5,
-      6,
-      "+",
-      1,
-      2,
-      3,
-      "-",
-      ".",
-      0,
-      "/",
-      "x",
-      "reset",
-      "=",
+      {
+        value: "7",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "8",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "9",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "del",
+        type: ButtonType.DEL
+      },
+      {
+        value: "4",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "5",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "6",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "+",
+        type: ButtonType.OPERATOR
+      },
+      {
+        value: "1",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "2",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "3",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "-",
+
+        type: ButtonType.OPERATOR
+      },
+      {
+        value: ".",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "0",
+        type: ButtonType.DIGIT
+      },
+      {
+        value: "/",
+        type: ButtonType.OPERATOR
+      },
+      {
+        value: "x",
+        type: ButtonType.OPERATOR
+      },
+      {
+        value: "=",
+        type: ButtonType.OPERATOR
+      },
+      {
+        value: "reset",
+        type: ButtonType.RESET
+      }
+
     ];
 
-    return buttons.map((button, index) => {
-      if (button === "del")
-        return <Button value={button} key={index} func1={() => dispatch(del())} />
-      if (button === "=")
-        return <Button value={button} key={index} className="half-width-button" func1={() => handleEqual(calculatorState.operator)} />
-      if (button === "reset")
-        return <Button value={button} key={index} className="half-width-button" func1={() => dispatch(reset())} />
-      if (button === "+" || button === "-" || button === "x" || button === "/")
-        return <Button value={button} key={index} func1={() => dispatch(operation(button))} func2={valutation} />;
-      else
-        return <Button value={button} key={index} func1={() => dispatch(setDisplay(button))} />;
+    return buttons.map((button) => {
+      if (button.type === ButtonType.DEL)
+        return <Button value={button.value} key={button.value} func1={() => dispatch(del())} />
+      if (button.type === ButtonType.RESET)
+        return <Button value={button.value} key={button.value} className="half-width-button" func1={() => dispatch(reset())} />
+      if (button.type === ButtonType.OPERATOR){
+        if (button.value === "=")
+          return <Button value={button.value} key={button.value} className="half-width-button" func1={() => console.log("EQUAL")} />
+        else
+          return <Button value={button.value} key={button.value} func1={() => console.log("operator func1")} func2={() => console.log(" operator func2")} />;
+      }
+      return <Button value={button.value} key={button.value} func1={() => handleDigit(button.value)} />;
     });
   }, [calculatorState, dispatch]);
 
