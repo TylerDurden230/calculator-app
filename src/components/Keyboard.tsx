@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import Button from "./Button";
 import { useDispatch, useSelector } from "react-redux";
-import { setDisplay, reset, del, setValue1, setValue2, resetDisplay } from "../features/calculator/calculatorSlice";
+import { reset, del, setValue1, setValue2, setOperator } from "../features/calculator/calculatorSlice";
 import { ButtonType } from "../types/types";
 
 const Keyboard = () => {
@@ -17,6 +17,11 @@ const Keyboard = () => {
     }
     else if (calculatorState.value1.isSet && !calculatorState.value2.isSet)
       dispatch(setValue2(buttonValue))
+  }
+
+  const handleOperator = (buttonValue : string) => {
+    console.log("handleOperator");
+    dispatch(setOperator(buttonValue))
 
   }
 
@@ -107,7 +112,7 @@ const Keyboard = () => {
         if (button.value === "=")
           return <Button value={button.value} key={button.value} className="half-width-button" func1={() => console.log("EQUAL")} />
         else
-          return <Button value={button.value} key={button.value} func1={() => console.log("operator func1")} func2={() => console.log(" operator func2")} />;
+          return <Button value={button.value} key={button.value} func1={() => handleOperator(button.value)} func2={() => console.log(" operator func2")} />;
       }
       return <Button value={button.value} key={button.value} func1={() => handleDigit(button.value)} />;
     });

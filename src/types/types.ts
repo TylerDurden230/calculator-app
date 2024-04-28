@@ -6,7 +6,7 @@ export enum ButtonType {
 }
 
 export type OperationValue = {
-    value: string | number,
+    value: string,
     isSet: boolean
 
 }
