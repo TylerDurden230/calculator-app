@@ -7,6 +7,7 @@ interface CalculatorState {
     value2: OperationValue;
     operator: Operator | "" | null;
     result: number | null;
+    recap: string;
 }
 
 const initialState: CalculatorState = {
@@ -20,7 +21,8 @@ const initialState: CalculatorState = {
         isSet: false
     },
     operator: "",
-    result: null
+    result: null,
+    recap: ""
 };
 
 
@@ -46,8 +48,6 @@ const calculatorSlice = createSlice({
             }
         },
         setValue1: (state: CalculatorState, action) => {
-/*             typeof action.payload === "string" ? state.value1 = parseFloat(action.payload) :
-            state.value1 = action.payload */
             state.value1.value += action.payload;
             state.display += action.payload;
         },
@@ -59,12 +59,36 @@ const calculatorSlice = createSlice({
             console.log("SETOPERATOR", state.value1.value);
             
             if (state.value1.value != "" && !state.value1.isSet) {
-                console.log("SONO ENTRATO NEL 1 IF")
+                console.log("SONO ENTRATO NEL 1 IF: ", state.value1.value, state.value1.isSet)
                 state.operator = action.payload;
                 state.value1.isSet = true;
+                state.display = "";
+                state.recap = state.value1.value + state.operator;
             }
-            else if (state.value1.isSet && !state.value2.isSet && state.value2.value != ""){
+            else if (state.value1.isSet && state.value2.value != ""){
+                if (state.operator != ""){
+                    // verifico che tipo di operatore é salvato per eseguire l'operazione tra valore1 e valore2, e poi salvo il risultato in valore1
+                    switch(state.operator){
+                        case "+":
+                            state.value1.value = (parseFloat(state.value1.value) + parseFloat(state.value2.value)).toString();
+                            break;
+                        case "-":
+                            state.value1.value = (parseFloat(state.value1.value) - parseFloat(state.value2.value)).toString();
+                            break;
+                        case "x":
+                            state.value1.value = (parseFloat(state.value1.value) * parseFloat(state.value2.value)).toString();
+                            break;
+                        case "/":
+                            state.value1.value = (parseFloat(state.value1.value) / parseFloat(state.value2.value)).toString();
+                            break;
+                    }
+                    state.display = state.value1.value;
+                    state.value2.value = "";
+                }
+                state.recap = state.value1.value + state.operator;
                 state.value2.isSet = true;
+                state.operator = action.payload;
+
                 console.log("SONO ENTRATO NEL 2 IF")
             }
             else{
@@ -81,7 +105,8 @@ const calculatorSlice = createSlice({
                 value: "",
                 isSet: false
             },
-            state.display = ""
+            state.display = "",
+            state.recap = ""
         }
 
     }

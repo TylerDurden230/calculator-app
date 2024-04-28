@@ -54,6 +54,7 @@ body {
 }
 
 .display {
+  position: relative;
   background-color: var(--very-dark-blue);
   display: flex;
   justify-content: end;
@@ -91,4 +92,10 @@ body {
 
 .w-100 {
   width: 100%;
+}
+
+#recap {
+  position: absolute;
+  top: 15px;
+  left: 20px;
 }
