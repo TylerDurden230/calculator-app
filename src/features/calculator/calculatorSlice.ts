@@ -21,7 +21,7 @@ const initialState: CalculatorState = {
         isSet: false
     },
     operator: "",
-    result: null,
+    result: 0,
     recap: ""
 };
 
@@ -85,15 +85,39 @@ const calculatorSlice = createSlice({
                     state.display = state.value1.value;
                     state.value2.value = "";
                 }
-                state.recap = state.value1.value + state.operator;
-                state.value2.isSet = true;
                 state.operator = action.payload;
+                state.recap = state.value1.value + state.operator;
+                state.display = ''
 
                 console.log("SONO ENTRATO NEL 2 IF")
             }
             else{
                 console.log("non devo fare nulla", state);
             }
+        },
+        equal : (state : CalculatorState) => {
+            switch(state.operator){
+                case "+":
+                    state.result = (parseFloat(state.value1.value) + parseFloat(state.value2.value));
+                    state.display = state.result?.toString()
+                    state.recap = ''
+                    break;
+                case "-":
+                    state.result = (parseFloat(state.value1.value) - parseFloat(state.value2.value));
+                    state.display = state.result?.toString()
+                    state.recap = ''
+                    break;
+                case "x":
+                    state.result = (parseFloat(state.value1.value) * parseFloat(state.value2.value));
+                    state.display = state.result?.toString()
+                    state.recap = ''
+                    break;
+                case "/":
+                    state.result = (parseFloat(state.value1.value) / parseFloat(state.value2.value));
+                    state.display = state.result?.toString()
+                    state.recap = ''
+                    break;
+            } 
         },
         reset: (state: CalculatorState) => {
             state.result = null;
@@ -112,5 +136,5 @@ const calculatorSlice = createSlice({
     }
 })
 
-export const {reset, setDisplay, setValue1, setValue2, del, resetDisplay, setOperator } = calculatorSlice.actions
+export const {reset, setDisplay, setValue1, setValue2, del, resetDisplay, setOperator, equal } = calculatorSlice.actions
 export default calculatorSlice.reducer
