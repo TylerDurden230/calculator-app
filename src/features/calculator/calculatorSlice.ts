@@ -64,6 +64,17 @@ const calculatorSlice = createSlice({
         },
         setOperator: (state: CalculatorState, action) => {
             console.log("SETOPERATOR", state.value1.value);
+            if (state.operationStatus === "closed") {
+                state.operationStatus = "open"
+                state.value1 = {
+                    value: state.display,
+                    isSet: true
+                };
+                state.operator = action.payload;
+                state.recap = state.value1.value + state.operator;
+                state.display = ''
+
+            }
             
             if (state.value1.value != "" && !state.value1.isSet) {
                 console.log("SONO ENTRATO NEL 1 IF: ", state.value1.value, state.value1.isSet)
