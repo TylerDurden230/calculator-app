@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import {OperationValue, Operator } from "../../types/types";
 
 interface CalculatorState {
+    operationStatus: string,
     display: string,
     value1: OperationValue;
     value2: OperationValue;
@@ -10,7 +11,10 @@ interface CalculatorState {
     recap: string;
 }
 
+
+
 const initialState: CalculatorState = {
+    operationStatus: "open",
     display: "",
     value1: {
         value: "",
@@ -36,7 +40,10 @@ const calculatorSlice = createSlice({
             state.display += action.payload
         },
         resetDisplay: (state: CalculatorState) => {
-            state.display = ""
+            state.display = ''
+        },
+        setOperationStatus: (state: CalculatorState, action) => {
+            state.operationStatus = action.payload;
         },
         del: (state: CalculatorState) => {
             state.display = state.display.slice(0, -1);
@@ -67,7 +74,6 @@ const calculatorSlice = createSlice({
             }
             else if (state.value1.isSet && state.value2.value != ""){
                 if (state.operator != ""){
-                    // verifico che tipo di operatore é salvato per eseguire l'operazione tra valore1 e valore2, e poi salvo il risultato in valore1
                     switch(state.operator){
                         case "+":
                             state.value1.value = (parseFloat(state.value1.value) + parseFloat(state.value2.value)).toString();
@@ -100,22 +106,58 @@ const calculatorSlice = createSlice({
                 case "+":
                     state.result = (parseFloat(state.value1.value) + parseFloat(state.value2.value));
                     state.display = state.result?.toString()
-                    state.recap = ''
+                    state.recap = '';
+                    state.value1 = {
+                        value: '',
+                        isSet: false
+                    };
+                    state.value2 = {
+                        value: '',
+                        isSet: false
+                    }
+                    state.operationStatus = "closed"
                     break;
                 case "-":
                     state.result = (parseFloat(state.value1.value) - parseFloat(state.value2.value));
                     state.display = state.result?.toString()
-                    state.recap = ''
+                    state.recap = '';
+                    state.value1 = {
+                        value: '',
+                        isSet: false
+                    };
+                    state.value2 = {
+                        value: '',
+                        isSet: false
+                    }
+                    state.operationStatus = "closed"
                     break;
                 case "x":
                     state.result = (parseFloat(state.value1.value) * parseFloat(state.value2.value));
                     state.display = state.result?.toString()
-                    state.recap = ''
+                    state.recap = '';
+                    state.value1 = {
+                        value: '',
+                        isSet: false
+                    };
+                    state.value2 = {
+                        value: '',
+                        isSet: false
+                    }
+                    state.operationStatus = "closed"
                     break;
                 case "/":
                     state.result = (parseFloat(state.value1.value) / parseFloat(state.value2.value));
                     state.display = state.result?.toString()
-                    state.recap = ''
+                    state.recap = '';
+                    state.value1 = {
+                        value: '',
+                        isSet: false
+                    };
+                    state.value2 = {
+                        value: '',
+                        isSet: false
+                    }
+                    state.operationStatus = "closed"
                     break;
             } 
         },
@@ -136,5 +178,5 @@ const calculatorSlice = createSlice({
     }
 })
 
-export const {reset, setDisplay, setValue1, setValue2, del, resetDisplay, setOperator, equal } = calculatorSlice.actions
+export const {reset, setDisplay, resetDisplay, setValue1, setValue2, del, setOperator, equal, setOperationStatus } = calculatorSlice.actions
 export default calculatorSlice.reducer

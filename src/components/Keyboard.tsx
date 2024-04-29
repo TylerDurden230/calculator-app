@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import Button from "./Button";
 import { useDispatch, useSelector } from "react-redux";
-import { reset, del, setValue1, setValue2, setOperator, equal } from "../features/calculator/calculatorSlice";
+import { reset, del, setValue1, setValue2, setOperator, equal, setDisplay, resetDisplay, setOperationStatus } from "../features/calculator/calculatorSlice";
 import { ButtonType } from "../types/types";
 
 const Keyboard = () => {
@@ -12,7 +12,12 @@ const Keyboard = () => {
   const handleDigit = (buttonValue : string) => {
     console.log("handledigit")
     if (!calculatorState.value1.isSet){
-      console.log("handledigit 1st IF: value1-> ", calculatorState.value1)
+      console.log("handledigit 1st IF: value1-> ", calculatorState.value1, "OPSTATUS: ", calculatorState.operationStatus)
+      if (calculatorState.operationStatus === "closed"){
+        console.log("PERCHE NON LOFA?")
+        dispatch(resetDisplay())
+        dispatch(setOperationStatus("open"))
+      }
       dispatch(setValue1(buttonValue))
     }
     else if (calculatorState.value1.isSet && !calculatorState.value2.isSet)
