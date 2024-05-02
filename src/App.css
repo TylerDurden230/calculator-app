@@ -42,6 +42,10 @@ body {
   flex-direction: column;
 }
 
+.relative {
+  position: relative;
+}
+
 .space-between {
   justify-content: space-between;
 }
@@ -94,8 +98,44 @@ body {
   width: 100%;
 }
 
+.hm1 {
+  margin: 0 1rem;
+}
+
 #recap {
   position: absolute;
   top: 15px;
   left: 20px;
+}
+
+.switchTheme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.themeSelector {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--t1-red);
+  border-radius: 50%;
+}
+
+.switchBox {
+  cursor: pointer;
+  border: 1px solid red;
+  width: 18px;
+  height: 18px;
+  background-color: var(--keypad-bg);
+}
+
+.leftRounded {
+  border-radius: 25px 0 0 25px;
+}
+
+.rightRounded {
+  border-radius: 0 25px 25px 0;
 }

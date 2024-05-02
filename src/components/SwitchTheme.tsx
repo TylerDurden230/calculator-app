@@ -1,7 +1,12 @@
+import Switcher from "./Switcher"
+
 const SwitchTheme = () => {
   return (
-    <div>
-        <button>Switch</button>
+    <div className="switchTheme">
+      <div className="hm1">
+        <h6>THEME</h6>
+      </div>
+      <Switcher />
     </div>
   )
 }
