@@ -118,7 +118,7 @@ const Keyboard = () => {
         else
           return <Button value={button.value} key={button.value} func1={() => handleOperator(button.value)} func2={() => console.log(" operator func2")} />;
       }
-      return <Button value={button.value} key={button.value} func1={() => handleDigit(button.value)} />;
+      return <Button className={""} value={button.value} key={button.value} func1={() => handleDigit(button.value)} />;
     });
   }, [calculatorState, dispatch]);
 

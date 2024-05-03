@@ -14,7 +14,7 @@ const Button = ({value, className, func1, func2} : Props) => {
 
   return (
     <div className={className}>
-      <button className="main-button" onClick={handleClick}>{value}</button>
+      <button className={`main-button ${className}`} onClick={handleClick}>{value}</button>
     </div>
   )
 }
