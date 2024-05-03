@@ -122,11 +122,11 @@ body {
   height: 12px;
   background-color: var(--t1-red);
   border-radius: 50%;
+  transition: 0.45s ease-in-out;
 }
 
 .switchBox {
   cursor: pointer;
-  border: 1px solid red;
   width: 18px;
   height: 18px;
   background-color: var(--keypad-bg);
