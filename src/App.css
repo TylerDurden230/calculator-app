@@ -7,6 +7,7 @@
   --very-dark-blue: hsl(224, 36%, 15%);
   --keypad-bg: hsl(223, 31%, 20%);
   --dark-blue: hsl(222, 26%, 31%);
+  --light-red: hsl(6, 70%, 65%);
   --t1-red: hsl(6, 63%, 50%);
   --dark-red: hsl(6, 70%, 34%);
   --light-grayish-orange: hsl(30, 25%, 89%);
@@ -84,15 +85,27 @@ body {
   position: relative;
 }
 
+.absolute {
+  position: absolute;
+}
+
+.r0 {
+  right: 0;
+}
+
 .space-between {
   justify-content: space-between;
+}
+
+.space-around {
+  justify-content: space-around;
 }
 
 .calculator {
   display: grid;
   grid-template-rows: 70px 100px 1fr;
-  height: 80vh;
-  width: 400px;
+  height: 600px;
+  width: 500px;
 }
 
 .display {
@@ -118,6 +131,22 @@ body {
 .main-button {
   width: 100%;
   cursor: pointer;
+  border: none;
+  background-color: var(--light-grayish-orange);
+  color: var(--t1-text-dark-blue);
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.equal-button {
+  background-color: var(--t1-red);
+  color: var(--white);
+}
+
+.equal-button:active {
+  background-color: var(--light-red);
 }
 
 .half-width-button{
@@ -161,6 +190,11 @@ body {
   background-color: var(--t1-red);
   border-radius: 50%;
   transition: 0.45s ease-in-out;
+  cursor: pointer;
+}
+
+.themeSelector:hover {
+  background-color: var(--light-red);
 }
 
 .switchBox {
@@ -168,6 +202,12 @@ body {
   width: 18px;
   height: 18px;
   background-color: var(--keypad-bg);
+}
+
+.numberBox {
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
 }
 
 .leftRounded {

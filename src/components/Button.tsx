@@ -1,11 +1,12 @@
 type Props = {
     value: string | number,
-    className?: string,
+    divStyle?: string,
+    buttonStyle?: string,
     func1?: () => void,
     func2?: () => void
 }
 
-const Button = ({value, className, func1, func2} : Props) => {
+const Button = ({value, divStyle, buttonStyle, func1, func2} : Props) => {
 
   const handleClick = () =>{
     if(func1) func1();
@@ -13,8 +14,8 @@ const Button = ({value, className, func1, func2} : Props) => {
   } 
 
   return (
-    <div className={className}>
-      <button className={`main-button ${className}`} onClick={handleClick}>{value}</button>
+    <div className={divStyle}>
+      <button className={`main-button ${buttonStyle}`} onClick={handleClick}>{value}</button>
     </div>
   )
 }

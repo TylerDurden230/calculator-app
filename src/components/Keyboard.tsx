@@ -44,7 +44,7 @@ const Keyboard = () => {
         type: ButtonType.DIGIT
       },
       {
-        value: "del",
+        value: "DEL",
         type: ButtonType.DEL
       },
       {
@@ -97,28 +97,27 @@ const Keyboard = () => {
         type: ButtonType.OPERATOR
       },
       {
-        value: "=",
-        type: ButtonType.OPERATOR
+        value: "RESET",
+        type: ButtonType.RESET
       },
       {
-        value: "reset",
-        type: ButtonType.RESET
+        value: "=",
+        type: ButtonType.OPERATOR
       }
-
     ];
 
     return buttons.map((button) => {
       if (button.type === ButtonType.DEL)
         return <Button value={button.value} key={button.value} func1={() => dispatch(del())} />
       if (button.type === ButtonType.RESET)
-        return <Button value={button.value} key={button.value} className="half-width-button" func1={() => dispatch(reset())} />
+        return <Button value={button.value} key={button.value} divStyle="half-width-button" buttonStyle="reset-button" func1={() => dispatch(reset())} />
       if (button.type === ButtonType.OPERATOR){
         if (button.value === "=")
-          return <Button value={button.value} key={button.value} className="half-width-button" func1={() => dispatch(equal())} />
+          return <Button divStyle={"half-width-button"} buttonStyle="equal-button" value={button.value} key={button.value} func1={() => dispatch(equal())} />
         else
-          return <Button value={button.value} key={button.value} func1={() => handleOperator(button.value)} func2={() => console.log(" operator func2")} />;
+          return <Button buttonStyle={"operator-button"} value={button.value} key={button.value} func1={() => handleOperator(button.value)} func2={() => console.log(" operator func2")} />;
       }
-      return <Button className={""} value={button.value} key={button.value} func1={() => handleDigit(button.value)} />;
+      return <Button buttonStyle={"number-button"} value={button.value} key={button.value} func1={() => handleDigit(button.value)} />;
     });
   }, [calculatorState, dispatch]);
 
