@@ -8,7 +8,7 @@ const Display = () => {
   console.log("INSIDE display: ", display)
 
   return (
-    <div className='debug-border p1 display'>
+    <div className='p1 display'>
       <div id="recap">
         <h5>{recap}</h5>
       </div>

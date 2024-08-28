@@ -63,7 +63,6 @@ const calculatorSlice = createSlice({
             state.display += action.payload;
         },
         setOperator: (state: CalculatorState, action) => {
-            console.log("SETOPERATOR", state.value1.value);
             if (state.operationStatus === "closed") {
                 state.operationStatus = "open"
                 state.value1 = {
@@ -77,7 +76,6 @@ const calculatorSlice = createSlice({
             }
             
             if (state.value1.value != "" && !state.value1.isSet) {
-                console.log("SONO ENTRATO NEL 1 IF: ", state.value1.value, state.value1.isSet)
                 state.operator = action.payload;
                 state.value1.isSet = true;
                 state.display = "";
@@ -105,14 +103,12 @@ const calculatorSlice = createSlice({
                 state.operator = action.payload;
                 state.recap = state.value1.value + state.operator;
                 state.display = ''
-
-                console.log("SONO ENTRATO NEL 2 IF")
-            }
-            else{
-                console.log("non devo fare nulla", state);
             }
         },
         equal : (state : CalculatorState) => {
+            if (state.value1.value === "" || state.value2.value === ""){
+                return;
+            }
             switch(state.operator){
                 case "+":
                     state.result = (parseFloat(state.value1.value) + parseFloat(state.value2.value));

@@ -108,7 +108,7 @@ const Keyboard = () => {
 
     return buttons.map((button) => {
       if (button.type === ButtonType.DEL)
-        return <Button value={button.value} key={button.value} func1={() => dispatch(del())} />
+        return <Button value={button.value} key={button.value} func1={() => dispatch(del())} buttonStyle="reset-button" />
       if (button.type === ButtonType.RESET)
         return <Button value={button.value} key={button.value} divStyle="half-width-button" buttonStyle="reset-button" func1={() => dispatch(reset())} />
       if (button.type === ButtonType.OPERATOR){
@@ -121,7 +121,7 @@ const Keyboard = () => {
     });
   }, [calculatorState, dispatch]);
 
-  return <div className="debug-border p1 keyboard">{displayButtons}</div>;
+  return <div className="p1 keyboard">{displayButtons}</div>;
 };
 
 export default Keyboard;

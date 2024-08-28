@@ -10,7 +10,7 @@ const Calculator = () => {
   console.log("state: ", state)
 
   return (
-    <div className='calculator debug-border'>
+    <div className='calculator'>
       <Header />
       <Display />
       <Keyboard />
