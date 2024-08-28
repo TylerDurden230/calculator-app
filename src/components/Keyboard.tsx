@@ -10,9 +10,7 @@ const Keyboard = () => {
   const calculatorState = useSelector((state: any) => state.calculator);
 
   const handleDigit = (buttonValue : string) => {
-    console.log("handledigit")
     if (!calculatorState.value1.isSet){
-      console.log("handledigit 1st IF: value1-> ", calculatorState.value1, "OPSTATUS: ", calculatorState.operationStatus)
       if (calculatorState.operationStatus === "closed"){
         dispatch(resetDisplay())
         dispatch(setOperationStatus("open"))
@@ -24,9 +22,7 @@ const Keyboard = () => {
   }
 
   const handleOperator = (buttonValue : string) => {
-    console.log("handleOperator");
     dispatch(setOperator(buttonValue))
-
   }
 
   const displayButtons = useMemo(() => {

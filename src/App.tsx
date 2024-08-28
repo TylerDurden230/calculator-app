@@ -1,13 +1,14 @@
 
 import './App.css'
 import Calculator from './components/Calculator'
+import ThemeProvider from './providers/themeProvider'
 
 function App() {
-  
- return (
-    <>
-      <Calculator />
-    </>
+
+  return (
+    <ThemeProvider >
+        <Calculator />
+    </ThemeProvider>
   )
 }
 

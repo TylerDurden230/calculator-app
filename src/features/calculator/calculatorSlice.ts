@@ -70,7 +70,7 @@ const calculatorSlice = createSlice({
                     isSet: true
                 };
                 state.operator = action.payload;
-                state.recap = state.value1.value + state.operator;
+                state.recap = state.value1.value + " " + state.operator;
                 state.display = ''
 
             }
@@ -79,7 +79,7 @@ const calculatorSlice = createSlice({
                 state.operator = action.payload;
                 state.value1.isSet = true;
                 state.display = "";
-                state.recap = state.value1.value + state.operator;
+                state.recap = state.value1.value + " " + state.operator;
             }
             else if (state.value1.isSet && state.value2.value != ""){
                 if (state.operator != ""){
@@ -101,7 +101,7 @@ const calculatorSlice = createSlice({
                     state.value2.value = "";
                 }
                 state.operator = action.payload;
-                state.recap = state.value1.value + state.operator;
+                state.recap = state.value1.value + " " + state.operator;
                 state.display = ''
             }
         },
