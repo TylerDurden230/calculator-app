@@ -104,9 +104,9 @@ const Keyboard = () => {
 
     return buttons.map((button) => {
       if (button.type === ButtonType.DEL)
-        return <Button value={button.value} key={button.value} func1={() => dispatch(del())} buttonStyle="reset-button" />
+        return <Button value={button.value} key={button.value} func1={() => dispatch(del())} buttonStyle="delres-button" />
       if (button.type === ButtonType.RESET)
-        return <Button value={button.value} key={button.value} divStyle="half-width-button" buttonStyle="reset-button" func1={() => dispatch(reset())} />
+        return <Button value={button.value} key={button.value} divStyle="half-width-button" buttonStyle="delres-button" func1={() => dispatch(reset())} />
       if (button.type === ButtonType.OPERATOR){
         if (button.value === "=")
           return <Button divStyle={"half-width-button"} buttonStyle="equal-button" value={button.value} key={button.value} func1={() => dispatch(equal())} />

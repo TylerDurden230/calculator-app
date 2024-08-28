@@ -41,6 +41,7 @@
 /* Backgrounds */
 --very-dark-violet: hsl(268, 75%, 9%); /* (main background) */
 --very-dark-violet2: hsl(268, 71%, 12%) /* (toggle background, keypad background, screen background) */
+--black: hsl(268, 71%, 12%); /* (key shadow) */
 
 /* Keys */
 
@@ -50,6 +51,7 @@
 --soft-cyan: hsl(177, 92%, 70%); /* (key shadow) */
 --very-dark-violet3: hsl(268, 47%, 21%); /* (key background) */
 --dark-magenta: hsl(290, 70%, 36%); /* (key shadow) */
+--dark-magenta: hsl(281, 50%, 50%); /* (key shadow) */
 
 /* Text */ 
 
@@ -68,11 +70,12 @@
 
 body {
   font-family: var(--main-font), sans-serif;
+  color: var(--text-color);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: var(--dark-blue);
+  background-color: var(--background-color);
 }
 
 
@@ -113,11 +116,11 @@ body {
 
 .display {
   position: relative;
-  background-color: var(--very-dark-blue);
+  background-color: var(--display-bg);
   display: flex;
   justify-content: end;
   align-items: center;
-  color: var(--white);
+  color: var(--display-text-color);
   border-radius: 10px;
   margin: 0.5rem;
   font-size: 1.5rem;
@@ -136,9 +139,9 @@ body {
   width: 100%;
   cursor: pointer;
   border: none;
-  background-color: var(--light-grayish-orange);
-  color: var(--t1-text-dark-blue);
-  box-shadow: 0 4px var(--grayish-orange);
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  box-shadow: 0 4px var(--button-shadow);
   font-size: 1.5rem;
   font-weight: 700;
   padding: 1rem;
@@ -146,23 +149,23 @@ body {
 }
 
 .main-button:active {
-  background-color: var(--white);
+  background-color: var(--button-active-bg);
 }
 
 .equal-button {
-  background-color: var(--t1-red);
-  color: var(--white);
-  box-shadow: 0 4px var(--dark-red);
+  background-color: var(--bg-equal-key);
+  color: var(--text-equal-key);
+  box-shadow: 0 4px var(--shadow-equal-keyd);
 }
 
 .equal-button:active {
   background-color: var(--light-red);
 }
 
-.reset-button {
-  background-color: var(--desaturated-dark-blue-key);
-  color: var(--white);
-  box-shadow: 0 4px var(--dark-blue-shadow);
+.delres-button {
+  background-color: var(--bg-delres-key); /* --bg-delres-key */  
+  color: var(--text-delres-key); /* --text-delres-key */
+  box-shadow: 0 4px var(--shadow-delres-key); /* --shadow-delres-key */
 }
 
 .reset-button:active {
@@ -196,6 +199,7 @@ body {
 }
 
 .switchTheme {
+  color: var(--text-color);
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -204,7 +208,7 @@ body {
 }
 
 .switchTheme h6 {
-  color: var(--white);
+  color: var(--text-color);
   margin: 0.38rem;
   display: inline;
 }
@@ -215,21 +219,21 @@ body {
   left: 4px;
   width: 12px;
   height: 12px;
-  background-color: var(--t1-red);
+  background-color: var(--toggle-color);
   border-radius: 50%;
   transition: 0.45s ease-in-out;
   cursor: pointer;
 }
 
 .themeSelector:hover {
-  background-color: var(--light-red);
+  background-color: var(--toggle-hover);
 }
 
 .switchBox {
   cursor: pointer;
   width: 18px;
   height: 18px;
-  background-color: var(--keypad-bg);
+  background-color: var(--toggle-bg);
 }
 
 .numberBox {
