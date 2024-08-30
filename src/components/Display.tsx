@@ -11,7 +11,7 @@ const Display = () => {
         <h5>{recap}</h5>
       </div>
       <div>
-        <h2>{display}</h2>
+        <h2 id="value">{display}</h2>
       </div>
     </div>
   )
