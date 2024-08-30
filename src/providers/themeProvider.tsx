@@ -22,6 +22,7 @@ const themes: Record<ThemeKeys, Record<string, string>> = {
         '--shadow-equal-key': 'hsl(6, 70%, 34%)',
         '--text-equal-key': 'hsl(0, 0%, 100%)',
         '--bg-equal-active': 'hsl(6, 63%, 60%)',
+        '--toggle-color': 'hsl(25, 98%, 40%)',
         '--toggle-bg': 'hsl(0, 5%, 81%)',
         '--toggle-hover': 'hsl(290, 70%, 36%)',
       },
